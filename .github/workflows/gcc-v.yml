@@ -25,13 +25,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # set up gcc
+      # Set up gcc https://github.com/marketplace/actions/install-gcc
       - name: Set up GCC
         uses: egor-tensin/setup-gcc@v1
         with:
           version: 11
           platform: x64
-    
+      # Sets up a specific version of LLVM on GitHub Actions, and adds the command-line tools to the PATH.
+      # https://github.com/marketplace/actions/setup-llvm
+      - name: Setup LLVM
+        uses: ZhongRuoyu/setup-llvm@v0
+        with:
+          llvm-version: 17
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
@@ -40,5 +45,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           gcc -v
+          clang -v
           echo Add other actions to build,
           echo test, and deploy your project.
